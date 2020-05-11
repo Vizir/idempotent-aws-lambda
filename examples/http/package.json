@@ -1,0 +1,13 @@
+{
+  "name": "http",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Vizir Software Studio <contato@vizir.com.br>",
+  "contributors": [
+    "Tiago de Assis Gonçalves <contato@tiagogoncalves.com.br>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.674.0"
+  }
+}

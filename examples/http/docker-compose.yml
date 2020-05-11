@@ -1,0 +1,19 @@
+version: "3.6"
+
+services:
+  dynamodb:
+    image: amazon/dynamodb-local:1.12.0
+    ports:
+      - 8000:8000
+  configure:
+    image: node:14-alpine
+    command: node configure.js
+    environment:
+      AWS_REGION: us-east-1
+      AWS_SECRET_ACCESS_KEY: dev
+      AWS_ACCESS_KEY_ID: dev
+    volumes:
+      - $PWD:$PWD
+    working_dir: $PWD
+    depends_on:
+      - dynamodb

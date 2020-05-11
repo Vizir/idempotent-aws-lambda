@@ -1,0 +1,57 @@
+{
+  "name": "@vizir/idempotent-aws-lambda",
+  "version": "1.0.0",
+  "description": "A fast way to turn your aws lambda idempotent.",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist/src"
+  ],
+  "scripts": {
+    "prepare": "tsc",
+    "lint": "eslint . --ext ts",
+    "pretest": "npm run lint",
+    "test": "jest --config ./jest.config.json",
+    "test:watch": "jest --config ./jest.config.json --watch"
+  },
+  "keywords": [
+    "idempotent aws lambda"
+  ],
+  "author": "Vizir Software Studio <contato@vizir.com.br>",
+  "contributors": [
+    "Tiago de Assis Gonçalves <contato@tiagogoncalves.com.br>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.673.0",
+    "eslint-plugin-jest": "^23.13.1"
+  },
+  "devDependencies": {
+    "@types/faker": "^4.1.12",
+    "@types/jest": "^25.2.2",
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-sonarjs": "^0.5.0",
+    "faker": "^4.1.0",
+    "husky": "^4.2.5",
+    "jest": "^26.0.1",
+    "nock": "^12.0.3",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1",
+    "ts-jest": "^26.0.0",
+    "typescript": "^3.9.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiagogoncalves89/idempotent-aws-lambda.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tiagogoncalves89/idempotent-aws-lambda/issues"
+  },
+  "homepage": "https://github.com/tiagogoncalves89/idempotent-aws-lambda#readme"
+}
