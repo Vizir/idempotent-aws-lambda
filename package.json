@@ -48,10 +48,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tiagogoncalves89/idempotent-aws-lambda.git"
+    "url": "git+https://github.com/vizir/idempotent-aws-lambda.git"
   },
   "bugs": {
-    "url": "https://github.com/tiagogoncalves89/idempotent-aws-lambda/issues"
+    "url": "https://github.com/vizir/idempotent-aws-lambda/issues"
   },
-  "homepage": "https://github.com/tiagogoncalves89/idempotent-aws-lambda#readme"
+  "homepage": "https://github.com/vizir/idempotent-aws-lambda#readme",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  }
 }
