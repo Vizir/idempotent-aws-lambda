@@ -4,7 +4,7 @@ import { DynamoDB } from "./providers/dynamoDB";
 const DEFAULT_TTL = 5;
 
 interface IdempotencyHttpOptionsProviderDynamoDB {
-  name: Providers;
+  name: Providers.DynamoDB;
   endpoint?: string;
   region: string;
   tableName: string;
