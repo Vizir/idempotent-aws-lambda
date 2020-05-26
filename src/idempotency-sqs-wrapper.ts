@@ -57,7 +57,7 @@ export const idempotencySQSWrapper = (
         .promise();
     }
 
-    event.records = newRecords;
+    event.Records = newRecords;
 
     return options.handler(event, context);
   };
