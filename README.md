@@ -20,6 +20,8 @@ $ npm install @vizir/idempotent-aws-lambda
 
 ## Usage
 
+### HTTP
+
 Use the default aws request id to avoid duplicate requests:
 
 ```javascript
@@ -89,6 +91,32 @@ module.exports.handler = idempotencyHttpWrapper({
     name: "myIdempotencyHeader",
     fallback: true,
   },
+});
+```
+
+### SQS
+
+Prevent duplicate calls into sqs trigger. The ttl cannot be high to avoid retry problems.
+
+The own aws can call your lambda twice, in this case we will ignore and remove from SQS.
+
+```javascript
+module.exports.sqsHandler = idempotencySQSWrapper({
+  handler: async (event, context) => {
+    console.log("Processing message", event, context);
+    return "OK";
+  },
+  provider: {
+    endpoint: process.env.ENDPOINT,
+    name: "dynamoDB",
+    region: process.env.REGION,
+    tableName: process.env.TABLE_NAME,
+  },
+  queue: {
+    region: process.env.REGION,
+    url: process.env.QUEUE_URL,
+  },
+  ttl: 5,
 });
 ```
 

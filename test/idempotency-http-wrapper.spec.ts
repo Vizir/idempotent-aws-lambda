@@ -1,8 +1,7 @@
-/* eslint-disable */
+/* eslint-disable sonarjs/no-duplicate-string */
 import faker from "faker";
 import nock from "nock";
-import { idempotencyHttpWrapper } from "../src";
-import { Providers } from "../src/providers";
+import { idempotencyHttpWrapper, Providers } from "../src";
 
 describe("idempotency-http-wrapper", () => {
   const mockNow = Date.now();
