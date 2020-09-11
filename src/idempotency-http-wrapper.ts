@@ -49,19 +49,18 @@ const getRequestId = (event: any, options: IdempotencyHttpOptionsId): any => {
 export const idempotencyHttpWrapper = (
   options: IdempotencyHttpOptions
 ): CallableFunction => {
+  const provider = new DynamoDB({
+    tableName: options.provider.tableName,
+    region: options.provider.region,
+    endpoint: options.provider.endpoint,
+    ttl: options.ttl ?? DEFAULT_TTL,
+  });
   return async (event: any, context: any): Promise<any> => {
     const messageId = getRequestId(event, options.id);
 
     if (isEmpty(messageId)) {
       return options.handler(event, context);
     }
-
-    const provider = new DynamoDB({
-      tableName: options.provider.tableName,
-      region: options.provider.region,
-      endpoint: options.provider.endpoint,
-      ttl: options.ttl ?? DEFAULT_TTL,
-    });
 
     const hasProcessed = await provider.isProcessing(messageId);
 
