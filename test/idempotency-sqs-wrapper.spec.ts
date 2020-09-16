@@ -41,9 +41,17 @@ describe("idempotency-sqs-wrapper", () => {
         ttl,
       });
       const expectedTtl = String(Math.floor(mockNow / 1000) + ttl);
+      const expectedValidTime = String(Math.floor(mockNow / 1000) - ttl);
       nock(endpointDynamo)
         .post("/", {
-          ConditionExpression: "attribute_not_exists(messageId)",
+          ConditionExpression:
+            "attribute_not_exists(messageId) or (#ttl < :validTime)",
+          ExpressionAttributeNames: {
+            "#ttl": "ttl",
+          },
+          ExpressionAttributeValues: {
+            ":validTime": { N: expectedValidTime },
+          },
           Item: { messageId: { S: messageId }, ttl: { N: expectedTtl } },
           TableName: tableName,
         })
@@ -82,9 +90,17 @@ describe("idempotency-sqs-wrapper", () => {
         ttl,
       });
       const expectedTtl = String(Math.floor(mockNow / 1000) + ttl);
+      const expectedValidTime = String(Math.floor(mockNow / 1000) - ttl);
       nock(endpointDynamo)
         .post("/", {
-          ConditionExpression: "attribute_not_exists(messageId)",
+          ConditionExpression:
+            "attribute_not_exists(messageId) or (#ttl < :validTime)",
+          ExpressionAttributeNames: {
+            "#ttl": "ttl",
+          },
+          ExpressionAttributeValues: {
+            ":validTime": { N: expectedValidTime },
+          },
           Item: { messageId: { S: messageId }, ttl: { N: expectedTtl } },
           TableName: tableName,
         })
@@ -125,9 +141,17 @@ describe("idempotency-sqs-wrapper", () => {
         },
       });
       const expectedTtl = String(Math.floor(mockNow / 1000) + defaultTTL);
+      const expectedValidTime = String(Math.floor(mockNow / 1000) - defaultTTL);
       nock(endpointDynamo)
         .post("/", {
-          ConditionExpression: "attribute_not_exists(messageId)",
+          ConditionExpression:
+            "attribute_not_exists(messageId) or (#ttl < :validTime)",
+          ExpressionAttributeNames: {
+            "#ttl": "ttl",
+          },
+          ExpressionAttributeValues: {
+            ":validTime": { N: expectedValidTime },
+          },
           Item: { messageId: { S: messageId }, ttl: { N: expectedTtl } },
           TableName: tableName,
         })

@@ -39,11 +39,19 @@ export class DynamoDB implements Provider {
   public async isProcessing(messageId: string): Promise<boolean> {
     const creationTime = Math.floor(Date.now() / 1000);
     const ttl = creationTime + this.ttl;
+    const validTime = creationTime - this.ttl;
 
     try {
       await this.ddb
         .put({
-          ConditionExpression: "attribute_not_exists(messageId)",
+          ConditionExpression:
+            "attribute_not_exists(messageId) or (#ttl < :validTime)",
+          ExpressionAttributeNames: {
+            "#ttl": "ttl",
+          },
+          ExpressionAttributeValues: {
+            ":validTime": validTime,
+          },
           Item: { messageId: messageId, ttl },
           TableName: this.tableName,
         })
