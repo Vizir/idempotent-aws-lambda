@@ -36,7 +36,7 @@ export const idempotencySQSWrapper = (
 
     const newRecords = [];
 
-    for (let record of event.Records) {
+    for (const record of event.Records) {
       const messageId = record.messageId;
 
       const hasProcessed = await provider.isProcessing(messageId);

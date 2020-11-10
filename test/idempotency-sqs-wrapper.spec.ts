@@ -7,7 +7,6 @@ describe("idempotency-sqs-wrapper", () => {
   const mockNow = Date.now();
 
   beforeEach(() => {
-    // @ts-ignore
     jest.spyOn(Date, "now").mockReturnValue(mockNow);
     nock.disableNetConnect();
   });
