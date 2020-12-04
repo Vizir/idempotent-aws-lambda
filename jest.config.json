@@ -4,6 +4,7 @@
   "coverageDirectory": "coverage",
   "coverageReporters": ["text"],
   "preset": "ts-jest",
+  "setupFiles": ["./test/jest-setup-file.ts"],
   "testEnvironment": "node",
   "testPathIgnorePatterns": ["node_modules", "dist", "examples"]
 }
