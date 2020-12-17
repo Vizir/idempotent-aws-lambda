@@ -1,9 +1,8 @@
 /* eslint-disable sonarjs/no-duplicate-string */
-import faker = require("faker");
-import nock = require("nock");
-import { idempotencySQSWrapper } from "../src/idempotency-sqs-wrapper";
+import faker from "faker";
+import nock from "nock";
+import { idempotencySQSWrapper, Providers } from "../src";
 import { Providers } from "../src/providers";
-jest.setTimeout(10000);
 
 describe("idempotency-sqs-wrapper", () => {
   const mockNow = Date.now();

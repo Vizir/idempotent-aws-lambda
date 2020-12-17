@@ -1,4 +1,4 @@
-import { SQS } from "aws-sdk";
+import SQS from "aws-sdk/clients/sqs";
 import { Providers } from "./providers";
 import { DynamoDB } from "./providers/dynamoDB";
 
