@@ -2,7 +2,6 @@
 import faker from "faker";
 import nock from "nock";
 import { idempotencySQSWrapper, Providers } from "../src";
-import { Providers } from "../src/providers";
 
 describe("idempotency-sqs-wrapper", () => {
   const mockNow = Date.now();
