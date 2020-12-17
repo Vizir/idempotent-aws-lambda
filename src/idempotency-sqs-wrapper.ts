@@ -50,14 +50,14 @@ const getMessageId = (record: any, options: IdempotencySQSOptionsId): any => {
   const body = JSON.parse(record.body);
   const message = JSON.parse(body.Message);
 
-  let id: string = "";
+  let id = "";
   if (!isEmpty(options.name)) {
     options.name.forEach((value) => {
-      let keys = value.split(".");
+      const keys = value.split(".");
       let messageValue: any = message;
 
       if (!isEmpty(keys)) {
-        for (let key of keys) {
+        for (const key of keys) {
           if (messageValue[key] !== Object(messageValue[key])) {
             id += messageValue[key];
             break;
