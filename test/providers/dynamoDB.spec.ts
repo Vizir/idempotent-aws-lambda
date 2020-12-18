@@ -110,9 +110,7 @@ describe("DynamoDB", () => {
       expect(result).toBeTruthy();
     });
 
-    it("Should thrown an error when some internal error happen", async (): Promise<
-      void
-    > => {
+    it("Should thrown an error when some internal error happen", async (): Promise<void> => {
       // Given
       const endpoint: string = faker.internet.url();
       nock(endpoint).post("/").reply(400, undefined, {
