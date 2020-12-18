@@ -1,6 +1,6 @@
 {
   "name": "@vizir/idempotent-aws-lambda",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "A fast way to turn your aws lambda idempotent.",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
