@@ -100,6 +100,10 @@ Prevent duplicate calls into sqs trigger. The ttl cannot be high to avoid retry 
 
 The own aws can call your lambda twice, in this case we will ignore and remove from SQS.
 
+There are two ways to handle the idempotency SQS.
+
+One is as follow the example bellow, which means the idempotency key will be the messageId from SQS.
+
 ```javascript
 module.exports.sqsHandler = idempotencySQSWrapper({
   handler: async (event, context) => {
@@ -119,6 +123,42 @@ module.exports.sqsHandler = idempotencySQSWrapper({
   ttl: 5,
 });
 ```
+
+Another way is customizing the idempotency's key, from the payload of the received message.
+
+Let's suppose the message's body is
+
+```
+stream: { eventType: 'SENT', id: '1234567890' }
+```
+
+The idempotency's configuration will be:
+
+```javascript
+module.exports.sqsHandler = idempotencySQSWrapper({
+  handler: async (event, context) => {
+    console.log("Processing message", event, context);
+    return "OK";
+  },
+  provider: {
+    endpoint: process.env.ENDPOINT,
+    name: "dynamoDB",
+    region: process.env.REGION,
+    tableName: process.env.TABLE_NAME,
+  },
+  queue: {
+    region: process.env.REGION,
+    url: process.env.QUEUE_URL,
+  },
+  ttl: 5,
+  id: {
+    from: "event",
+    name: ["stream.id", "stream.eventType"],
+  },
+});
+```
+
+The result in the table will be a recod, which the key will be: `1234567890SENT`.
 
 ## Support
 
